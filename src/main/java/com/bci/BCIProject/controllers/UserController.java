@@ -34,6 +34,8 @@ public class UserController {
         User us;
         try {
             user.setCreatedTime(OffsetDateTime.now().now());
+            user.setModifiedTime(OffsetDateTime.now());
+            user.setLastLogin(OffsetDateTime.now());
             us = service.saveUser(user);
         }catch (DataIntegrityViolationException e){
             return new ResponseEntity(new ErrorResponse("500", "Item duplicado, ya existe el correo"), HttpStatus.ALREADY_REPORTED);

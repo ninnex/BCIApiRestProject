@@ -1,7 +1,11 @@
 package com.bci.BCIProject.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,8 +22,10 @@ import java.util.UUID;
 
 @Entity
 @Table
-@Data
 @Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     @Id
     private UUID uuid = UUID.randomUUID();
@@ -32,6 +38,9 @@ public class User {
     @OneToMany(cascade = {CascadeType.ALL})
     private List<Phone> phones;
     private OffsetDateTime createdTime;
+    private OffsetDateTime modifiedTime;
+    private OffsetDateTime lastLogin;
     private Boolean isActive = true;
+
 
 }
