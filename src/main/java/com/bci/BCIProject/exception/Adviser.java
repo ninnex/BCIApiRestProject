@@ -19,7 +19,7 @@ public class Adviser {
 
     @ExceptionHandler(TransactionSystemException.class)
     public final ResponseEntity<ErrorResponse> handleTransactionSystemException(TransactionSystemException e){
-        return new ResponseEntity(new ErrorResponse("500", "Email inválido o password inseguro"), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(new ErrorResponse("400", "Email inválido o password inseguro"), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(ItemNotFoundException.class)
