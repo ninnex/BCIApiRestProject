@@ -8,6 +8,6 @@ import java.util.UUID;
 public interface UserService {
 
     User saveUser(User user);
-    Optional<User> getUser(UUID id);
+    User getUser(UUID id);
 
 }

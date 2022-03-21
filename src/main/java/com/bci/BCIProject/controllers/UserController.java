@@ -25,21 +25,14 @@ public class UserController {
     private final UserService service;
 
     @PostMapping
-    public ResponseEntity<User> createUser(@RequestBody User user){
-
-            user.setCreatedTime(OffsetDateTime.now().now());
-            user.setModifiedTime(OffsetDateTime.now());
-            user.setLastLogin(OffsetDateTime.now());
-            User us = service.saveUser(user);
-
-        System.out.println("user = " + user);
+    public ResponseEntity<User> createUser(@RequestBody User user) {
+        User us = service.saveUser(user);
         return new ResponseEntity<User>(us, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUser(@PathVariable("id") String id) {
-        return new ResponseEntity<User>(service.getUser(UUID.fromString(id))
-            .orElseThrow(ItemNotFoundException::new), HttpStatus.FOUND);
+        return new ResponseEntity<User>(service.getUser(UUID.fromString(id)), HttpStatus.FOUND);
     }
 
 }
