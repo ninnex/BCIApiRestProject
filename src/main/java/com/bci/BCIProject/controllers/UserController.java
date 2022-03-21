@@ -1,11 +1,10 @@
 package com.bci.BCIProject.controllers;
 
+import com.bci.BCIProject.exception.ItemNotFoundException;
 import com.bci.BCIProject.model.ErrorResponse;
 import com.bci.BCIProject.model.User;
-import com.bci.BCIProject.services.UserService;
-import lombok.AllArgsConstructor;
+import com.bci.BCIProject.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.ConstraintViolationException;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -31,29 +26,20 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<User> createUser(@RequestBody User user){
-        User us;
-        try {
+
             user.setCreatedTime(OffsetDateTime.now().now());
             user.setModifiedTime(OffsetDateTime.now());
             user.setLastLogin(OffsetDateTime.now());
-            us = service.saveUser(user);
-        }catch (DataIntegrityViolationException e){
-            return new ResponseEntity(new ErrorResponse("500", "Item duplicado, ya existe el correo"), HttpStatus.ALREADY_REPORTED);
-        }
-        catch (TransactionSystemException e){
-            e.printStackTrace();
-            return new ResponseEntity(new ErrorResponse("500", "Email inválido o password inseguro"), HttpStatus.ALREADY_REPORTED);
-        }
+            User us = service.saveUser(user);
+
         System.out.println("user = " + user);
         return new ResponseEntity<User>(us, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUser(@PathVariable("id") String id){
-        return service.getUser(UUID.fromString(id)).map( user ->
-            new ResponseEntity<User>(user, HttpStatus.FOUND)
-        ).orElseGet( ()->
-            new ResponseEntity(new ErrorResponse("404", "Item no encontrado"), HttpStatus.NOT_FOUND)
-        );
+    public ResponseEntity<User> getUser(@PathVariable("id") String id) {
+        return new ResponseEntity<User>(service.getUser(UUID.fromString(id))
+            .orElseThrow(ItemNotFoundException::new), HttpStatus.FOUND);
     }
+
 }

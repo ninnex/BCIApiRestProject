@@ -1,4 +1,4 @@
-package com.bci.BCIProject.services;
+package com.bci.BCIProject.service;
 
 import com.bci.BCIProject.model.User;
 import com.bci.BCIProject.repository.UserRepository;

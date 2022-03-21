@@ -3,19 +3,14 @@ package com.bci.BCIProject.controllers;
 import com.bci.BCIProject.model.Phone;
 import com.bci.BCIProject.model.User;
 import com.bci.BCIProject.repository.UserRepository;
-import com.bci.BCIProject.services.UserService;
-import com.bci.BCIProject.services.UserServiceImpl;
-import org.junit.jupiter.api.AfterEach;
+import com.bci.BCIProject.service.UserServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.AdditionalAnswers;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +21,6 @@ import java.util.UUID;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest

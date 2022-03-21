@@ -1,7 +1,6 @@
-package com.bci.BCIProject.services;
+package com.bci.BCIProject.service;
 
 import com.bci.BCIProject.model.User;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.UUID;
