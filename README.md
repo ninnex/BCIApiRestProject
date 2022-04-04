@@ -14,6 +14,11 @@ Para ver la documentación del proyecto se puede usando la herramienta Swagger a
 http://localhost:8080/swagger-ui.html
 donde encontrarás dos principales request. El POST para agregar usuarios nuevos y el GET para obtener usuarios ya guardados
 
+Antes de enviar cualquier request es necesario autenticarse con JWT obteniendo el token de autenticación desde el siguiente endpoint:
+http://localhost:8080/authenticate
+
+Luego debe ser enviado en la cabecera de cada request agregando el campo Authorization = "Bearer [TOKEN]"
+
 Para almacenar usuario debes enviar el json en el body del método POST
 
 Para obtener un usuario almacenado debes enviar el uuid en la url del método GET
@@ -62,8 +67,14 @@ Se agregaron en la carpeta principal del proyecto imágenes referenciales para u
 # Consola de base de datos H2
 
  ![Screenshot H2 consola](https://user-images.githubusercontent.com/38047248/158486175-e4020a96-0f0a-40e0-97d5-b0f538116576.jpg)
+ 
+ # Obteniendo token de JWT
 
+![Screenshot JWT Authentication](https://user-images.githubusercontent.com/38047248/161640678-fabacb8e-3194-4e59-8407-79b074071c1b.jpg)
 
+# Autenticándose usando el token de JWT
+
+![Screenshot Sending Bearer](https://user-images.githubusercontent.com/38047248/161641393-f05ad893-a10f-47c7-881b-98da1c7adbf8.jpg)
 
 
 Muchas gracias por tu tiempo  :)
